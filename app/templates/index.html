@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% autoescape true %}
+
+<style type="text/css">
+div {
+    margin: 10px;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 15px;
+}
+
+.t-right {
+    text-align: right;
+}
+</style>
+
+<html>
+    <title>HOW HAPPY</title>
+    <body>
+        <h2>Welcome {{ user.name }}!</h2>
+        <div><img src="{{ user.photo_url }}"/></div>
+        <div>This website uses the power of MAGIC (and Google Cloud Vision) to tell you how happy you and your friends are. Feel free to ignore any feelings you may have to the contrary. It uses a scale from 1 to 5 where 1 means you're kinda down and 5 means you <b>SO</b> happy.</div>
+        <div>Your photo's happiness score: {{ user_score }}</div>
+        <div>Your friends' average happiness score: {{ avg_friend_happiness | round(2) }}</div>
+        <div>
+            <table>
+                <tr>
+                    <th>Friend</th>
+                    <th>Score</th>
+                    <th>Photo</th>
+                </tr>
+                {% for friend in friends %}
+                    <tr>
+                        <td>{{ friend.name }}</td>
+                        <td>{{ friend.happiness_level }}</td>
+                        <td><img src="{{ friend.photo_url }}"/></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </body>
+</html>
+
+{% endautoescape %}
